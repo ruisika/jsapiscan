@@ -40,6 +40,7 @@ JSAPIscan.exe -f urls.txt
 JSAPIscan.exe -u https://example.com -t 20 -d 5
 
 ```
+<img width="1168" height="624" alt="image" src="https://github.com/user-attachments/assets/cd4dea00-8e39-4388-b8c7-27a8a66cd86d" />
 
 ### 高级用法
 
