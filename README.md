@@ -38,7 +38,7 @@ JSAPIscan.exe -u https://example.com -t 20 -d 5
 ### 高级用法
 
 ```bash
-# 启用自动接口测试（未授权访问检测）
+# 启用自动接口测试（-auto 是未授权访问检测 不加只会爬取）
 JSAPIscan.exe -u https://example.com -auto
 
 # 携带参数进行测试
