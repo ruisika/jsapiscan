@@ -65,7 +65,6 @@ JSAPIscan.exe -f urls.txt -auto -t 15 -d 4
 | `-f` | URL文件路径 | - | `-f urls.txt` |
 | `-t` | 线程数 | 10 | `-t 20` |
 | `-d` | 爬取深度 | 3 | `-d 5` |
-| `-o` | 输出文件 | `res/timestamp/timestamp.txt` | `-o results.txt` |
 | `-auto` | 启用自动接口测试 | false | `-auto` |
 | `-aparms` | 携带参数测试 | false | `-aparms` |
 | `-apoc` | 启用POC测试 | false | `-apoc` |
@@ -102,10 +101,10 @@ res/
 
 欢迎提交Issue和Pull Request！
 
-![qrcode_for_gh_50331db8da12_344](https://github.com/user-attachments/assets/0ba9d133-3590-4ed9-9789-1393810bccbe)
+
 
 ## 📞 联系方式
-
+![扫码_搜索联合传播样式-标准色版](https://github.com/user-attachments/assets/dc53e67f-3a17-4ef9-b8f6-48441dabbd7c)
 - **GitHub**: [https://github.com/ruisika/jsapiscan](https://github.com/ruisika/jsapiscan)
 - **版本**: v0.26
 - **作者**: BTCSEC Team
@@ -113,3 +112,14 @@ res/
 ---
 
 **⚠️ 免责声明**: 本工具仅供安全研究和授权测试使用，使用者需承担相应的法律责任。
+本工具/脚本/内容仅供合法的网络安全测试与技术研究使用，使用者在使用前必须遵守《中华人民共和国网络安全法》、《中华人民共和国刑法》、《计算机信息系统安全保护条例》等相关法律法规。
+
+授权范围：仅限在取得相关系统或网站书面授权的情况下使用。
+
+禁止用途：严禁将本工具/脚本/内容用于任何未经授权的渗透测试、攻击、入侵、数据窃取、破坏等违法行为。
+
+法律责任：任何因不当使用本工具/脚本/内容而造成的法律后果及损失，由使用者自行承担，作者概不负责。
+
+风险提示：在进行网络安全测试时，请确保对目标系统不造成中断、数据丢失或服务不可用等影响。
+
+使用本工具/脚本/内容即视为您已阅读并同意以上免责声明。
