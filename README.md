@@ -1,4 +1,4 @@
-# JSAPIscan - JavaScript API 扫描工具
+# JSAPIscan 扫描工具
 
 一个高性能的JavaScript API端点发现和扫描工具，专门用于从JavaScript文件中提取API接口信息并进行安全测试。
 
@@ -9,7 +9,7 @@
 - **🚀 高性能扫描**: 多线程并发处理，支持自定义线程数
 - **🛡️ 安全测试**: 内置未授权访问测试和POC验证功能
 - **📊 智能输出**: 自动生成CSV报告和详细日志
-- **🔧 灵活配置**: 支持批量URL扫描、自定义深度、代理设置等
+- **🔧 灵活配置**: 支持批量URL扫描、自定义深度等
 - **📁 自动管理**: 自动创建时间戳文件夹，结果分类存储
 
 ## 📋 系统要求
@@ -21,22 +21,7 @@
 
 ## 🛠️ 安装方法
 
-### 方法1: 从源码编译
-
-```bash
-# 克隆项目
-git clone https://github.com/ruisika/jsapiscan.git
-cd JSAPIscan
-
-# 安装依赖
-go mod tidy
-
-# 编译项目
-go build -o JSAPIscan.exe main.go  # Windows
-go build -o JSAPIscan main.go      # Linux/macOS
-```
-
-### 方法2: 直接下载
+ 直接下载
 
 从 [Releases](https://github.com/ruisika/jsapiscan/releases) 页面下载最新版本的预编译二进制文件。
 
@@ -54,8 +39,6 @@ JSAPIscan.exe -f urls.txt
 # 设置线程数和爬取深度
 JSAPIscan.exe -u https://example.com -t 20 -d 5
 
-# 指定输出文件
-JSAPIscan.exe -u https://example.com -o results.txt
 ```
 
 ### 高级用法
@@ -101,37 +84,6 @@ res/
     └── parms.txt              # 参数信息
 ```
 
-## 🔍 扫描原理
-
-1. **URL抓取**: 从目标网站抓取所有可访问的页面
-2. **JS文件发现**: 自动识别和下载JavaScript文件
-3. **API提取**: 使用正则表达式和解析器提取API端点
-4. **智能分析**: 识别Webpack、Vue等框架的JS文件结构
-5. **接口测试**: 对发现的API进行未授权访问测试
-6. **结果生成**: 生成详细的CSV报告和日志文件
-
-## 🏗️ 项目结构
-
-```
-JSAPIscan/
-├── cmd/                    # 命令行参数处理
-├── common/                 # 通用功能模块
-├── config/                 # 配置管理
-├── engine/                 # 扫描引擎
-├── internal/               # 内部核心模块
-│   ├── fetcher/           # 数据抓取器
-│   ├── httpclient/        # HTTP客户端
-│   ├── parser/            # JS解析器
-│   ├── scheduler/         # 任务调度器
-│   ├── storage/           # 数据存储
-│   └── worker/            # 工作协程
-├── report/                 # 报告生成
-├── utils/                  # 工具函数
-├── res/                    # 输出结果目录
-├── main.go                 # 程序入口
-└── README.md              # 项目说明
-```
-
 ## 📊 支持的框架
 
 - **Webpack**: 自动解析chunk.js文件
@@ -150,20 +102,7 @@ JSAPIscan/
 
 欢迎提交Issue和Pull Request！
 
-1. Fork 项目
-2. 创建功能分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 开启 Pull Request
-
-## 📄 许可证
-
-本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情
-
-## 🙏 致谢
-
-- 感谢所有贡献者的支持
-- 特别感谢 [BTCSEC](https://github.com/ruisika) 团队
+![qrcode_for_gh_50331db8da12_344](https://github.com/user-attachments/assets/0ba9d133-3590-4ed9-9789-1393810bccbe)
 
 ## 📞 联系方式
 
