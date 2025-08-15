@@ -100,8 +100,6 @@ res/
 ## 📞 联系方式
 ![扫码_搜索联合传播样式-标准色版](https://github.com/user-attachments/assets/dc53e67f-3a17-4ef9-b8f6-48441dabbd7c)
 - **GitHub**: [https://github.com/ruisika/jsapiscan](https://github.com/ruisika/jsapiscan)
-- **版本**: v0.26
-- **作者**: BTCSEC Team
 
 ---
 
