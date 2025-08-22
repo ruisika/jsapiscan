@@ -20,7 +20,8 @@
 从 [Releases](https://github.com/ruisika/jsapiscan/releases) 页面下载最新版本的预编译二进制文件。
 
 ## 📖 使用方法
-<img width="1699" height="834" alt="image" src="https://github.com/user-attachments/assets/d9444a78-70e0-4e49-9752-3405e190041d" />
+<img width="1752" height="880" alt="image" src="https://github.com/user-attachments/assets/d894d090-16f3-4dbd-9d27-30b1d98c49a3" />
+
 <img width="1752" height="1104" alt="image" src="https://github.com/user-attachments/assets/3819a1b5-e4db-4971-aae3-944ee7f7d209" />
 
 
