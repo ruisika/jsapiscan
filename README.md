@@ -87,22 +87,22 @@ res/
 ```
 
 ## 250825更新
-v0.29
-会简单检测sql注入和文件下载漏洞
-<img width="1114" height="486" alt="image" src="https://github.com/user-attachments/assets/e31b51ec-3a6c-4ffd-9b1a-9d35e6a071dc" />
+v0.29  
+会简单检测sql注入和文件下载漏洞  
+<img width="1114" height="486" alt="image" src="https://github.com/user-attachments/assets/e31b51ec-3a6c-4ffd-9b1a-9d35e6a071dc" />  
 <img width="1138" height="615" alt="image" src="https://github.com/user-attachments/assets/b1323150-0b36-4d5b-8be8-574a17c65ce2" />
-优化逻辑（把除了js的路径都从新改了一下不知道其他站点如何 反正pikachu靶场效果不错 后面在观察观察）
+优化逻辑（把除了js的路径都从新改了一下不知道其他站点如何 反正pikachu靶场效果不错 后面在观察观察）  
 
-v0.28
-添加关键字检测
-添加-o html文件输出（因为涉及到并发 多个url同时扫描慎用 用了也没用 后续看看有什么好的方案吧）
-添加-K 只查看关键的文件
-添加-sc 不打印状态码
+v0.28  
+添加关键字检测  
+添加-o html文件输出（因为涉及到并发 多个url同时扫描慎用 用了也没用 后续看看有什么好的方案吧）  
+添加-K 只查看关键的文件  
+添加-sc 不打印状态码  
 
-v0.27
-添加图标计算hash
-添加title显示
-优化路径检测逻辑
+v0.27  
+添加图标计算hash  
+添加title显示  
+优化路径检测逻辑  
 
 ## 📊 支持的框架
 
