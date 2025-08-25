@@ -86,8 +86,8 @@ res/
     └── bug.txt                 # 漏洞url文件
 ```
 
-## 250825更新
-v0.29  
+## 更新
+v0.29  250825
 会简单检测sql注入和文件下载漏洞  
 <img width="1114" height="486" alt="image" src="https://github.com/user-attachments/assets/e31b51ec-3a6c-4ffd-9b1a-9d35e6a071dc" />  
 <img width="1138" height="615" alt="image" src="https://github.com/user-attachments/assets/b1323150-0b36-4d5b-8be8-574a17c65ce2" />
