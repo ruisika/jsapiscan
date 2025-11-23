@@ -6,7 +6,9 @@
 说快速是假的涉及到太多js文件的时候也会很慢，规则大部分来自熊猫头，所以一般的话熊猫头能看到该工具也没问题，如果熊猫头能行我的不行，求求你联系我，我看看这么个事。
 
 
-更新内容：https://ruisika.github.io/apiscan/update/
+更新内容以后都发布这里：https://ruisika.github.io/apiscan/update/
+
+不在单独修改此页面
 ## 🚀 功能特性
 
 - **🔍 智能API发现**: 自动从JavaScript文件中提取API端点路径
