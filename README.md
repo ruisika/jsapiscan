@@ -24,7 +24,7 @@
 
  直接下载
 
-从 [Releases](https://github.com/ruisika/jsapiscan/releases) 页面下载最新版本的预编译二进制文件。
+从 [Releases](https://github.com/ruisika/jsapiscan/releases) 页面下载最新版本的预编译二进制文件。V0.5.1
 
 ## 📖 使用方法
 <img width="1752" height="880" alt="image" src="https://github.com/user-attachments/assets/d894d090-16f3-4dbd-9d27-30b1d98c49a3" />
