@@ -131,6 +131,9 @@ v0.27
 添加title显示  
 优化路径检测逻辑  
 
+v0.6
+优化webpack
+
 ## 📊 支持的框架
 
 - **Webpack**: 自动解析chunk.js文件
