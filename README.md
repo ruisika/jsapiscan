@@ -36,18 +36,6 @@
 - 📝 多格式输出：TXT / HTML / CSV
 
 ### 🚀 快速开始
-
-> 需要 Go **1.25+**。
-
-```bash
-# 标准构建
-go build -o JSAPIscan.exe main.go         # Windows
-go build -o JSAPIscan main.go             # Linux / macOS
-
-# 多平台 + 混淆构建（需要 garble）
-build.bat
-```
-
 ```bash
 # 单 URL 扫描
 JSAPIscan.exe -u https://example.com
