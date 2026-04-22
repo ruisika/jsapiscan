@@ -27,9 +27,6 @@
 # 🛰️ JSAPIscan
 
 ![Go](https://img.shields.io/badge/Go-1.25%2B-00ADD8?logo=go&logoColor=white)
-![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey)
-![License](https://img.shields.io/badge/License-See%20LICENSE-blue)
-![Build](https://img.shields.io/badge/Build-garble%20%7C%20go%20build-success)
 
 一个 Go 语言开发的 JS 文件发现与接口扫描工具 🔎 —— A high-performance JavaScript endpoint discovery & unauthorized-access testing tool written in Go.
 
@@ -61,17 +58,6 @@
 - 📝 多格式输出：TXT / HTML / CSV
 
 ### 🚀 快速开始
-
-> 需要 Go **1.25+**。
-
-```bash
-# 标准构建
-go build -o JSAPIscan.exe main.go         # Windows
-go build -o JSAPIscan main.go             # Linux / macOS
-
-# 多平台 + 混淆构建（需要 garble）
-build.bat
-```
 
 ```bash
 # 单 URL 扫描
@@ -180,10 +166,6 @@ JSAPIscan.exe -u https://example.com -gjca "password,secret_key,admin"
 JSAPIscan.exe -u https://example.com -gjc "internal_api,debug_mode"
 ```
 
-### 📦 作为 Go 库使用
-
-作为 SDK 调用请看 👉 [README_SDK.md](README_SDK.md)。
-
 ### 🐛 反馈
 
 - Issues：提交后 **一周内** 响应
@@ -215,17 +197,6 @@ A JavaScript endpoint discovery and interface-scanning tool written in Go, focus
 - 📝 Multi-format output: TXT / HTML / CSV
 
 ### 🚀 Quick Start
-
-> Requires Go **1.25+**.
-
-```bash
-# Standard build
-go build -o JSAPIscan.exe main.go         # Windows
-go build -o JSAPIscan main.go             # Linux / macOS
-
-# Multi-platform + obfuscated build (requires garble)
-build.bat
-```
 
 ```bash
 # Single URL
@@ -333,10 +304,6 @@ JSAPIscan.exe -u https://example.com -gjca "password,secret_key,admin"
 # Replace defaults
 JSAPIscan.exe -u https://example.com -gjc "internal_api,debug_mode"
 ```
-
-### 📦 Use as a Go Library
-
-See 👉 [README_SDK.md](README_SDK.md) for SDK-style API usage.
 
 ### 🐛 Feedback
 
