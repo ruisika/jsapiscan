@@ -1,177 +1,330 @@
-# JSAPIscan 扫描工具
-你们搞大模型的就是码奸，你们已经害死前端兄弟了，还要害死后端兄弟，测试兄弟，运维兄弟，害死网安兄弟，害死ic兄弟，最后害死自己害死全人类
-
-一个go语言开发的js文件发现和接口扫描工具，专门用于从JavaScript文件中提取API接口信息并进行安全测试。
-发现bug可以提交issues一周内会解决
-欢迎大家对比评测，**如果爬取的js文件或者路径没别的工具爬的多随时与我联系，我看看这么个事。**  
-说快速是假的涉及到太多js文件的时候也会很慢，规则大部分来自熊猫头，所以一般的话熊猫头能看到该工具也没问题，如果熊猫头能行我的不行，求求你联系我，我看看这么个事。
-如果发现这种形式的js无法进行正确匹配，联系我会有红包奖励感谢！
-<img width="1512" height="244" alt="image" src="https://github.com/user-attachments/assets/2340a882-98db-450f-b01a-d886d69ce39a" />
-
-更新内容以后都发布这里：https://ruisika.github.io/apiscan/update/
-
-不在单独修改此页面
-## 🚀 功能特性
-
-- **🔍 智能API发现**: 自动从JavaScript文件中提取API端点路径
-- **📱 多框架支持**: 支持Webpack、Vue、React等现代前端框架的JS文件解析
-- **🚀 高性能扫描**: 多线程并发处理，支持自定义线程数
-- **🛡️ 安全测试**: 内置未授权访问测试
-- **📊 智能输出**: 自动生成CSV报告和详细日志
-- **🔧 灵活配置**: 支持批量URL扫描、自定义深度等
-- **📁 自动管理**: 自动创建时间戳文件夹，结果分类存储
-
-## 🛠️ 安装方法
-
- 直接下载
-
-从 [Releases](https://github.com/ruisika/jsapiscan/releases) 页面下载最新版本的预编译二进制文件。V0.5.1
-
-## 📖 使用方法
-<img width="1752" height="880" alt="image" src="https://github.com/user-attachments/assets/d894d090-16f3-4dbd-9d27-30b1d98c49a3" />
-
-<img width="1752" height="1104" alt="image" src="https://github.com/user-attachments/assets/3819a1b5-e4db-4971-aae3-944ee7f7d209" />
-
-
-### 基本用法
-
-```bash
-# 扫描单个URL
-JSAPIscan.exe -u https://example.com
-
-# 批量扫描URL文件
-JSAPIscan.exe -f urls.txt
-
-# 设置线程数和爬取深度
-JSAPIscan.exe -u https://example.com -t 20 -d 5
-
-```
-
-### 高级用法
-
-```bash
-# 启用自动接口测试（-auto 是未授权访问检测 不加只会爬取）
-JSAPIscan.exe -u https://example.com -auto
-
-# 携带参数进行测试
-JSAPIscan.exe -u https://example.com -auto -aparms
-
-# 启用POC测试
-JSAPIscan.exe -u https://example.com -auto -aparms -apoc
-
-# 批量扫描并自动测试
-JSAPIscan.exe -f urls.txt -auto -t 15 -d 4
-```
-
-## 🔧 命令行参数
-
-| 参数      | 说明                              | 默认值   | 示例                        |
-|-----------|-----------------------------------|----------|-----------------------------|
-| `-u`      | 目标 URL                          | -        | `-u https://example.com`     |
-| `-f`      | URL 文件路径                      | -        | `-f urls.txt`                |
-| `-t`      | 线程数                            | 10       | `-t 20`                      |
-| `-d`      | 爬取深度                          | 3        | `-d 5`                       |
-| `-auto`   | 启用自动接口测试                 | false    | `-auto`                      |
-| `-aparms` | 携带参数进行测试（用于接口参数化） | false    | `-aparms`                    |
-| `-apoc`   | 启用 POC（Proof of Concept）测试 | false    | `-apoc`                      |
-| `-h`      | 显示帮助信息                      | false    | `-h`                         |
-| `-sc`     | 不显示相关状态码（隐藏输出的状态码） | ""       | `-sc`                        |
-| `-o`      | 输出文件类型                      | "txt"    | `txt、html`                  |
-| `-k`      | 只输出关键信息                    | false    | `-k`                         |
-| `-p`      | 设置代理                          | -        | `-p http://127.0.0.1:8080`  |
-| `-pa`     | 只对测试接口未授权进行使用代理    | false    | `-pa`                        |
-| `-gjca`   | 在原有的敏感字段基础上添加更多字段 | ""       | `-gjca /upload,密码`         |
-| `-gjc`    | 只使用指定的敏感字段进行匹配      | ""       | `-gjc /upload`               |
-
-## 📁 输出结构
-
-工具会在 `res/` 目录下自动创建时间戳文件夹，包含以下文件：
-
-```
-res/
-└── 20250814_101335/
-    ├── 1755137615.txt          # 主要扫描结果
-    ├── api_scan_domain.csv     # API扫描CSV报告
-    ├── findsometingzong.txt    # 发现内容汇总
-    └── parms.txt               # 参数信息
-    └── bug.txt                 # 漏洞url文件
-```
-
-## 更新
-v0.29.3 251114
-设置代理 (-p):
-使用 -p 参数来指定代理服务器，格式为：http://IP:端口
-例如：-p http://127.0.0.1:8080
-
-仅对测试接口未授权使用代理 (-pa):
-使用 -pa 参数（不需要值）来开启此模式。当开启时，代理仅用于测试接口未授权的情况。
-
-添加敏感字段 (-gjca):
-使用 -gjca 参数来添加自定义的敏感字段，多个字段用逗号分隔。这些字段会添加到工具默认的敏感字段列表中。
-例如：-gjca "login,admin" 会在默认字段基础上增加"login"和"admin"。
-
-自定义敏感字段 (-gjc):
-使用 -gjc 参数来指定工具只使用你提供的敏感字段，而忽略默认的敏感字段。多个字段用逗号分隔。
-例如：-gjc "api,config" 则工具只会匹配包含"api"和"config"的路径。
-
-
-v0.29  250825
-会简单检测sql注入和文件下载漏洞  
-<img width="1114" height="486" alt="image" src="https://github.com/user-attachments/assets/e31b51ec-3a6c-4ffd-9b1a-9d35e6a071dc" />  
-<img width="1138" height="615" alt="image" src="https://github.com/user-attachments/assets/b1323150-0b36-4d5b-8be8-574a17c65ce2" />
-优化逻辑（把除了js的路径都从新改了一下不知道其他站点如何 反正pikachu靶场效果不错 后面在观察观察）  
-
-v0.28  
-添加关键字检测  
-添加-o html文件输出（因为涉及到并发 多个url同时扫描慎用 用了也没用 后续看看有什么好的方案吧）  
-添加-K 只查看关键的文件  
-添加-sc 不打印状态码  
-
-v0.27  
-添加图标计算hash  
-添加title显示  
-优化路径检测逻辑  
-
-v0.6
-优化webpack
-
-## 📊 支持的框架
-
-- **Webpack**: 自动解析chunk.js文件
-- **Vue.js**: 识别Vue组件中的API调用
-- **React**: 支持React应用的JS文件分析
-- **通用JS**: 支持标准JavaScript文件解析
-
-## 🚨 注意事项
-
-1. **合法使用**: 请确保在获得授权的情况下使用本工具
-2. **网络限制**: 建议设置合理的线程数和超时时间
-3. **资源消耗**: 深度扫描会消耗较多网络和计算资源
-4. **结果验证**: 扫描结果仅供参考，请进行人工验证
-
-## 🤝 贡献指南
-
-欢迎提交Issue和Pull Request！
-
-
-
-## 📞 联系方式
-![扫码_搜索联合传播样式-标准色版](https://github.com/user-attachments/assets/dc53e67f-3a17-4ef9-b8f6-48441dabbd7c)
-- **GitHub**: [https://github.com/ruisika/jsapiscan](https://github.com/ruisika/jsapiscan)
+> ⚠️ **顶部告示 / Top Notice**
+>
+> 你们搞大模型的就是码奸，你们已经害死前端兄弟了，还要害死后端兄弟，测试兄弟，运维兄弟，害死网安兄弟，害死ic兄弟，最后害死自己害死全人类。
 
 ---
 
-**⚠️ 免责声明**: 本工具仅供安全研究和授权测试使用，使用者需承担相应的法律责任。
-本工具/脚本/内容仅供合法的网络安全测试与技术研究使用，使用者在使用前必须遵守《中华人民共和国网络安全法》、《中华人民共和国刑法》、《计算机信息系统安全保护条例》等相关法律法规。
+# 🛰️ JSAPIscan
 
-授权范围：仅限在取得相关系统或网站书面授权的情况下使用。
+![Go](https://img.shields.io/badge/Go-1.25%2B-00ADD8?logo=go&logoColor=white)
+![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey)
+![License](https://img.shields.io/badge/License-See%20LICENSE-blue)
+![Build](https://img.shields.io/badge/Build-garble%20%7C%20go%20build-success)
 
-禁止用途：严禁将本工具/脚本/内容用于任何未经授权的渗透测试、攻击、入侵、数据窃取、破坏等违法行为。
+一个 Go 语言开发的 JS 文件发现与接口扫描工具 🔎 —— A high-performance JavaScript endpoint discovery & unauthorized-access testing tool written in Go.
 
-法律责任：任何因不当使用本工具/脚本/内容而造成的法律后果及损失，由使用者自行承担，作者概不负责。
+**🌐 语言 / Language:** [🇨🇳 中文](#-中文文档) · [🇬🇧 English](#-english-docs)
 
-风险提示：在进行网络安全测试时，请确保对目标系统不造成中断、数据丢失或服务不可用等影响。
+---
 
-使用本工具/脚本/内容即视为您已阅读并同意以上免责声明。
+## 🇨🇳 中文文档
 
+### 📖 简介
 
+一个 Go 语言开发的 JS 文件发现和接口扫描工具，专门用于从 JavaScript 文件中提取 API 接口信息并进行安全测试。
+
+- 🐛 发现 bug 可以提交 Issues，**一周内会解决**。
+- 🤝 欢迎大家对比评测。如果爬取的 JS 文件或者路径没别的工具爬的多，随时与我联系，我看看这么个事。
+- 🐢 说"快速"是假的 —— 涉及到太多 JS 文件的时候也会很慢。
+- 🐼 规则大部分来自**熊猫头**，所以一般熊猫头能看到的该工具也没问题；如果熊猫头能行我的不行，求求你联系我，我看看这么个事。
+- 🧧 如果发现这种形式的 JS 无法进行正确匹配，联系我会有**红包奖励**，感谢！
+
+### ✨ 功能特性
+
+- 🕸️ 深度 JS 爬取，自动解析 Webpack chunk / RequireJS 模块
+- 🔓 API 接口自动提取 + 未授权访问测试（GET 405 自动 POST 重试）
+- 🕵️ 敏感信息识别（身份证 / 手机号 / 邮箱 / JWT / AK-SK 等）
+- 🧭 Vue Router 路径提取
+- 🧩 前端组件漏洞识别
+- 🧠 Headless 无头浏览器模式（Rod），面向重 JS 单页应用
+- 🌐 外链扫描（CDN / 跨域 JS）
+- 📝 多格式输出：TXT / HTML / CSV
+
+### 🚀 快速开始
+
+> 需要 Go **1.25+**。
+
+```bash
+# 标准构建
+go build -o JSAPIscan.exe main.go         # Windows
+go build -o JSAPIscan main.go             # Linux / macOS
+
+# 多平台 + 混淆构建（需要 garble）
+build.bat
+```
+
+```bash
+# 单 URL 扫描
+JSAPIscan.exe -u https://example.com
+
+# 批量扫描
+JSAPIscan.exe -f urls.txt
+
+# 无头浏览器模式（适合重 JS 页面）
+JSAPIscan.exe -u https://example.com -gorog
+```
+
+### 🛠️ 参数说明
+
+| 参数 | 默认值 | 说明 |
+|------|--------|------|
+| `-u` | | 目标 URL（逗号分隔支持多个） |
+| `-f` | | 批量 URL 文件路径 |
+| `-t` | 5 | 线程数（使用 `-u` 时强制为 1） |
+| `-d` | 8 | 爬取深度 |
+| `-time` | 10 | 单次请求超时（秒） |
+| `-maxreq` | 4000 | 单个 URL 最多 JS 请求数 |
+| `-maxhtml` | 40 | 单个 URL 最多 HTML 请求数 |
+| `-maxapi` | 3000 | 单目标最多 API 测试数量（0 不限制） |
+| `-header` | | 自定义请求头 `"Key:Value\r\nKey2:Value2"` |
+| `-p` | | 代理 `http://127.0.0.1:8080` |
+| `-pa` | false | 只对接口未授权测试使用代理 |
+| `-tlsverify` | false | 校验服务器 TLS 证书（扫内网自签证书保持关闭） |
+| `-gorog` | false | 开启无头浏览器模式 |
+| `-savejs` | false | 保存爬取到的 JS 源文件到 `res/js/` |
+| `-sc` | | 过滤显示的状态码，逗号分割 |
+| `-gjca` | | 追加自定义敏感关键字，逗号分割 |
+| `-gjc` | | 仅使用自定义关键字（替换默认） |
+| `-aget` | false | 接口测试只使用 GET |
+| `-basejspath` | | 自定义 JS 路径前缀（生成带/不带前缀两次请求） |
+| `-baseapipath` | | 自定义 API 路径前缀（生成带/不带前缀两次请求） |
+| `-extlink` | false | 开启外链扫描 |
+| `-extlinksuffix` | `.js,.html,.htm` | 外链扫描后缀，逗号分割 |
+| `-extlinkdepth` | 1 | 外链扫描深度 |
+| `-domainblock` | | 域名黑名单，逗号分割（默认含 github/google/bing 等） |
+| `-o` | txt | 输出格式 `txt` / `html` |
+| `-K` | false | 只打印关键文件 |
+| `-Ineedparms` | false | 开启参数提取并写入 `Params.txt` |
+
+### 📂 输出结构
+
+结果保存在 `res/<timestamp>/`：
+
+```
+res/20260212_150405/
+├── 🔥 敏感详细.txt          # 敏感信息汇总
+├── 📊 api_scan_*.csv        # 接口测试结果（状态 / 长度 / Body / 耗时）
+├── 🗺️ js敏感信息对应.txt    # JS 文件 → 敏感信息 映射
+├── 🗂️ 特殊文件路径.txt      # 特殊 / 敏感文件路径
+├── ⬇️ 文件下载.txt          # 可下载文件（Content-Disposition: attachment）
+├── 🧩 组件漏洞.txt          # 组件漏洞
+├── 🛑 漏洞.txt              # 通用漏洞
+├── 🧭 Vue路径信息.txt       # Vue 路由路径
+├── 🕵️ 敏感内容.txt          # 敏感内容匹配
+├── 🔑 关键词匹配.txt        # 自定义关键字命中
+├── 📝 Params.txt            # 提取参数（-Ineedparms）
+└── 📁 js/                   # 保存的 JS 源文件（-savejs）
+```
+
+### 🧪 进阶用法
+
+**自定义请求头 / 认证**
+
+```bash
+# Bearer Token
+JSAPIscan.exe -u https://example.com -header "Authorization:Bearer eyJhbGci..."
+
+# 多个头
+JSAPIscan.exe -u https://example.com -header "Authorization:Bearer token\r\nX-Custom:value"
+```
+
+**代理**
+
+```bash
+# 全局代理
+JSAPIscan.exe -u https://example.com -p http://127.0.0.1:8080
+
+# 只对接口测试阶段走代理（爬取阶段直连）
+JSAPIscan.exe -u https://example.com -p http://127.0.0.1:8080 -pa
+```
+
+**无头浏览器**
+
+```bash
+JSAPIscan.exe -u https://example.com -gorog
+```
+
+**外链扫描**
+
+```bash
+JSAPIscan.exe -u https://example.com -extlink -extlinksuffix ".js,.mjs" -extlinkdepth 2
+```
+
+**自定义敏感关键字**
+
+```bash
+# 追加
+JSAPIscan.exe -u https://example.com -gjca "password,secret_key,admin"
+
+# 仅使用（替换默认）
+JSAPIscan.exe -u https://example.com -gjc "internal_api,debug_mode"
+```
+
+### 📦 作为 Go 库使用
+
+作为 SDK 调用请看 👉 [README_SDK.md](README_SDK.md)。
+
+### 🐛 反馈
+
+- Issues：提交后 **一周内** 响应
+- 红包悬赏：遇到匹配不到的 JS 形态，欢迎联系作者 🎁
+
+---
+
+## 🇬🇧 English Docs
+
+### 📖 About
+
+A JavaScript endpoint discovery and interface-scanning tool written in Go, focused on extracting API routes from JS files and performing unauthorized-access testing.
+
+- 🐛 File issues if you hit bugs — **resolved within a week**.
+- 🤝 Benchmarks welcome. If another tool crawls more JS / paths than this one, reach out and I'll take a look.
+- 🐢 "Fast" is aspirational — when a target ships lots of JS, it can still be slow.
+- 🐼 Rules are largely inspired by **PandaHead (熊猫头)**; anything PandaHead detects, this should too. If PandaHead finds something this one misses, please tell me.
+- 🧧 If you have a JS pattern that can't be matched, contact me — **red-packet reward** included.
+
+### ✨ Features
+
+- 🕸️ Deep JS crawling with Webpack chunk & RequireJS module parsing
+- 🔓 API extraction + unauthorized-access tests (auto POST retry on GET 405)
+- 🕵️ Sensitive data detection (ID cards, phones, emails, JWT, access keys)
+- 🧭 Vue router path extraction
+- 🧩 Frontend component vulnerability detection
+- 🧠 Headless Chrome mode (Rod) for JS-heavy SPAs
+- 🌐 External-link scanning (CDN / cross-origin JS)
+- 📝 Multi-format output: TXT / HTML / CSV
+
+### 🚀 Quick Start
+
+> Requires Go **1.25+**.
+
+```bash
+# Standard build
+go build -o JSAPIscan.exe main.go         # Windows
+go build -o JSAPIscan main.go             # Linux / macOS
+
+# Multi-platform + obfuscated build (requires garble)
+build.bat
+```
+
+```bash
+# Single URL
+JSAPIscan.exe -u https://example.com
+
+# Batch from file
+JSAPIscan.exe -f urls.txt
+
+# Headless browser
+JSAPIscan.exe -u https://example.com -gorog
+```
+
+### 🛠️ Parameters
+
+| Flag | Default | Description |
+|------|---------|-------------|
+| `-u` | | Target URL (comma-separated for multiple) |
+| `-f` | | Batch URL file path |
+| `-t` | 5 | Thread count (forced to 1 when `-u` is used) |
+| `-d` | 8 | Crawl depth |
+| `-time` | 10 | Per-request timeout (seconds) |
+| `-maxreq` | 4000 | Max JS requests per URL |
+| `-maxhtml` | 40 | Max HTML requests per URL |
+| `-maxapi` | 3000 | Max API tests per target (0 = unlimited) |
+| `-header` | | Custom headers: `"Key:Value\r\nKey2:Value2"` |
+| `-p` | | Proxy: `http://127.0.0.1:8080` |
+| `-pa` | false | Use proxy only for API testing |
+| `-tlsverify` | false | Verify server TLS certs (keep off for self-signed internal targets) |
+| `-gorog` | false | Headless browser mode |
+| `-savejs` | false | Save crawled JS files to `res/js/` |
+| `-sc` | | Filter status codes, comma-separated |
+| `-gjca` | | Append custom sensitive keywords, comma-separated |
+| `-gjc` | | Use only custom keywords (replaces defaults) |
+| `-aget` | false | API testing uses GET only |
+| `-basejspath` | | Custom JS path prefix (issues both prefixed & unprefixed requests) |
+| `-baseapipath` | | Custom API path prefix (issues both prefixed & unprefixed requests) |
+| `-extlink` | false | Enable external-link scanning |
+| `-extlinksuffix` | `.js,.html,.htm` | External-link suffixes, comma-separated |
+| `-extlinkdepth` | 1 | External-link scan depth |
+| `-domainblock` | | Domain blocklist, comma-separated (default includes github/google/bing etc.) |
+| `-o` | txt | Output format (`txt` or `html`) |
+| `-K` | false | Print key files only |
+| `-Ineedparms` | false | Extract parameters into `Params.txt` |
+
+### 📂 Output Layout
+
+Results are written to `res/<timestamp>/`:
+
+```
+res/20260212_150405/
+├── 🔥 敏感详细.txt          # Sensitive-findings summary
+├── 📊 api_scan_*.csv        # API test results (status / length / body / duration)
+├── 🗺️ js敏感信息对应.txt    # JS file → sensitive info mapping
+├── 🗂️ 特殊文件路径.txt      # Special / sensitive file paths
+├── ⬇️ 文件下载.txt          # Downloadables (Content-Disposition: attachment)
+├── 🧩 组件漏洞.txt          # Component vulnerabilities
+├── 🛑 漏洞.txt              # General vulnerabilities
+├── 🧭 Vue路径信息.txt       # Vue router paths
+├── 🕵️ 敏感内容.txt          # Sensitive-content hits
+├── 🔑 关键词匹配.txt        # Custom-keyword hits
+├── 📝 Params.txt            # Extracted params (-Ineedparms)
+└── 📁 js/                   # Saved JS sources (-savejs)
+```
+
+### 🧪 Advanced Usage
+
+**Custom headers / auth**
+
+```bash
+# Bearer token
+JSAPIscan.exe -u https://example.com -header "Authorization:Bearer eyJhbGci..."
+
+# Multiple headers
+JSAPIscan.exe -u https://example.com -header "Authorization:Bearer token\r\nX-Custom:value"
+```
+
+**Proxy**
+
+```bash
+# Global proxy
+JSAPIscan.exe -u https://example.com -p http://127.0.0.1:8080
+
+# Proxy only for the API-testing phase
+JSAPIscan.exe -u https://example.com -p http://127.0.0.1:8080 -pa
+```
+
+**Headless browser**
+
+```bash
+JSAPIscan.exe -u https://example.com -gorog
+```
+
+**External-link scanning**
+
+```bash
+JSAPIscan.exe -u https://example.com -extlink -extlinksuffix ".js,.mjs" -extlinkdepth 2
+```
+
+**Custom sensitive keywords**
+
+```bash
+# Append
+JSAPIscan.exe -u https://example.com -gjca "password,secret_key,admin"
+
+# Replace defaults
+JSAPIscan.exe -u https://example.com -gjc "internal_api,debug_mode"
+```
+
+### 📦 Use as a Go Library
+
+See 👉 [README_SDK.md](README_SDK.md) for SDK-style API usage.
+
+### 🐛 Feedback
+
+- Issues are triaged **within a week**.
+- Got a JS pattern that slips past detection? Ping the author — 🎁 red-packet reward for reproducers.
+
+---
+
+## 📄 License
+
+See [LICENSE](LICENSE).
