@@ -1,10 +1,37 @@
+> ⚠️ **顶部告示 / Top Notice**
+>
 > 你们搞大模型的就是码奸，你们已经害死前端兄弟了，还要害死后端兄弟，测试兄弟，运维兄弟，害死网安兄弟，害死ic兄弟，最后害死自己害死全人类。
+
+---
+
+## ⚖️ 免责声明 / Disclaimer
+
+**🇨🇳 中文**
+
+本工具 **JSAPIscan** 仅供合法的安全研究、授权渗透测试与企业内部安全自查使用。使用者在使用本工具前，**必须确保已获得目标系统所有者的明确书面授权**。
+
+- 🚫 严禁将本工具用于任何未授权的攻击、入侵、数据窃取或其他违反法律法规的行为。
+- ⚖️ 任何因使用、误用或滥用本工具而导致的直接或间接后果（包括但不限于法律责任、经济损失、数据损坏、业务中断等），**均由使用者本人承担**，与作者及贡献者无关。
+- 📜 使用者应遵守所在国家／地区的法律法规，包括但不限于《中华人民共和国网络安全法》《中华人民共和国数据安全法》《中华人民共和国个人信息保护法》等相关规定。
+- 🔒 下载、安装、编译或以任何方式使用本工具，即视为您已阅读、理解并同意本免责声明的全部内容；如不同意，请立即停止使用并删除本项目的全部副本。
+
+**🇬🇧 English**
+
+**JSAPIscan** is provided **for lawful security research, authorized penetration testing, and internal security self-assessment only**. Before using this tool, you **must obtain explicit written authorization** from the owner of the target system.
+
+- 🚫 Any use of this tool for unauthorized intrusion, data theft, or any activity that violates applicable laws or regulations is strictly prohibited.
+- ⚖️ You are solely responsible for any consequences (legal, financial, operational, or otherwise) arising from your use, misuse, or abuse of this tool. The author and contributors accept **no liability** for any direct or indirect damages.
+- 📜 You must comply with all applicable laws and regulations in your jurisdiction, including but not limited to computer-misuse, cybersecurity, data-protection, and privacy laws.
+- 🔒 By downloading, installing, compiling, or otherwise using this tool, you acknowledge that you have read, understood, and agreed to this disclaimer in full. If you do not agree, stop using the tool and delete all copies immediately.
 
 ---
 
 # 🛰️ JSAPIscan
 
 ![Go](https://img.shields.io/badge/Go-1.25%2B-00ADD8?logo=go&logoColor=white)
+![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey)
+![License](https://img.shields.io/badge/License-See%20LICENSE-blue)
+![Build](https://img.shields.io/badge/Build-garble%20%7C%20go%20build-success)
 
 一个 Go 语言开发的 JS 文件发现与接口扫描工具 🔎 —— A high-performance JavaScript endpoint discovery & unauthorized-access testing tool written in Go.
 
@@ -36,6 +63,18 @@
 - 📝 多格式输出：TXT / HTML / CSV
 
 ### 🚀 快速开始
+
+> 需要 Go **1.25+**。
+
+```bash
+# 标准构建
+go build -o JSAPIscan.exe main.go         # Windows
+go build -o JSAPIscan main.go             # Linux / macOS
+
+# 多平台 + 混淆构建（需要 garble）
+build.bat
+```
+
 ```bash
 # 单 URL 扫描
 JSAPIscan.exe -u https://example.com
