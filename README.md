@@ -5,9 +5,6 @@
 # 🛰️ JSAPIscan
 
 ![Go](https://img.shields.io/badge/Go-1.25%2B-00ADD8?logo=go&logoColor=white)
-![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey)
-![License](https://img.shields.io/badge/License-See%20LICENSE-blue)
-![Build](https://img.shields.io/badge/Build-garble%20%7C%20go%20build-success)
 
 一个 Go 语言开发的 JS 文件发现与接口扫描工具 🔎 —— A high-performance JavaScript endpoint discovery & unauthorized-access testing tool written in Go.
 
