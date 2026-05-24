@@ -1,4 +1,6 @@
-> 你们搞大模型的就是码奸，你们已经害死前端兄弟了，还要害死后端兄弟，测试兄弟，运维兄弟，害死网安兄弟，害死ic兄弟，最后害死自己害死全人类。 使用工具遇到的任何问题，或者有意思的点都可以提issues！！
+> ⚠️ **顶部告示 / Top Notice**
+>
+> 你们搞大模型的就是码奸，你们已经害死前端兄弟了，还要害死后端兄弟，测试兄弟，运维兄弟，害死网安兄弟，害死ic兄弟，最后害死自己害死全人类。
 
 ---
 
@@ -27,6 +29,9 @@
 # 🛰️ JSAPIscan
 
 ![Go](https://img.shields.io/badge/Go-1.25%2B-00ADD8?logo=go&logoColor=white)
+![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey)
+![License](https://img.shields.io/badge/License-See%20LICENSE-blue)
+![Build](https://img.shields.io/badge/Build-garble%20%7C%20go%20build-success)
 
 一个 Go 语言开发的 JS 文件发现与接口扫描工具 🔎 —— A high-performance JavaScript endpoint discovery & unauthorized-access testing tool written in Go.
 
@@ -59,6 +64,8 @@
 
 ### 🚀 快速开始
 
+> 需要 Go **1.25+**。
+
 ```bash
 # 单 URL 扫描
 JSAPIscan.exe -u https://example.com
@@ -77,6 +84,7 @@ JSAPIscan.exe -u https://example.com -gorog
 | `-u` | | 目标 URL（逗号分隔支持多个） |
 | `-f` | | 批量 URL 文件路径 |
 | `-t` | 5 | 线程数（使用 `-u` 时强制为 1） |
+| `-ft` | 10 | 单目标内同层 JS/HTML 抓取并发数（`-u` 时仍可并发抓 chunk） |
 | `-d` | 8 | 爬取深度 |
 | `-time` | 10 | 单次请求超时（秒） |
 | `-maxreq` | 4000 | 单个 URL 最多 JS 请求数 |
@@ -88,6 +96,7 @@ JSAPIscan.exe -u https://example.com -gorog
 | `-tlsverify` | false | 校验服务器 TLS 证书（扫内网自签证书保持关闭） |
 | `-gorog` | false | 开启无头浏览器模式 |
 | `-savejs` | false | 保存爬取到的 JS 源文件到 `res/js/` |
+| `-saveapi` | false | 保存全部候选 API 接口到 `候选接口.txt`（完整列表，不受 `-maxapi` 截断） |
 | `-sc` | | 过滤显示的状态码，逗号分割 |
 | `-gjca` | | 追加自定义敏感关键字，逗号分割 |
 | `-gjc` | | 仅使用自定义关键字（替换默认） |
@@ -101,6 +110,11 @@ JSAPIscan.exe -u https://example.com -gorog
 | `-o` | txt | 输出格式 `txt` / `html` |
 | `-K` | false | 只打印关键文件 |
 | `-Ineedparms` | false | 开启参数提取并写入 `Params.txt` |
+| `-ey` | false | 开启恶意内容关键词匹配（默认关闭） |
+| `-person` | false | 开启身份证/手机号等个人信息提取（默认关闭） |
+| `-scan-libs` | false | 对公共 JS 库（jquery/vue/axios 等）也扫 Secret/JWT（默认跳过以避免误报） |
+| `-intranet-ip` | false | 匹配硬编码内网 IP（RFC1918，默认关闭以减少噪音） |
+| `-finding-verify` | false | 对 OSS 桶 / 地图 Key / LLM Key 发起黑盒只读 GET 验证（通过升 HIGH、失败降 LOW，默认关闭） |
 
 ### 📂 输出结构
 
@@ -198,6 +212,17 @@ A JavaScript endpoint discovery and interface-scanning tool written in Go, focus
 
 ### 🚀 Quick Start
 
+> Requires Go **1.25+**.
+
+```bash
+# Standard build
+go build -o JSAPIscan.exe main.go         # Windows
+go build -o JSAPIscan main.go             # Linux / macOS
+
+# Multi-platform + obfuscated build (requires garble)
+build.bat
+```
+
 ```bash
 # Single URL
 JSAPIscan.exe -u https://example.com
@@ -216,6 +241,7 @@ JSAPIscan.exe -u https://example.com -gorog
 | `-u` | | Target URL (comma-separated for multiple) |
 | `-f` | | Batch URL file path |
 | `-t` | 5 | Thread count (forced to 1 when `-u` is used) |
+| `-ft` | 10 | Per-target fetch concurrency for same-depth JS/HTML (chunks still fetched concurrently with `-u`) |
 | `-d` | 8 | Crawl depth |
 | `-time` | 10 | Per-request timeout (seconds) |
 | `-maxreq` | 4000 | Max JS requests per URL |
@@ -227,6 +253,7 @@ JSAPIscan.exe -u https://example.com -gorog
 | `-tlsverify` | false | Verify server TLS certs (keep off for self-signed internal targets) |
 | `-gorog` | false | Headless browser mode |
 | `-savejs` | false | Save crawled JS files to `res/js/` |
+| `-saveapi` | false | Save all API candidates to `候选接口.txt` (full list, not truncated by `-maxapi`) |
 | `-sc` | | Filter status codes, comma-separated |
 | `-gjca` | | Append custom sensitive keywords, comma-separated |
 | `-gjc` | | Use only custom keywords (replaces defaults) |
@@ -240,6 +267,11 @@ JSAPIscan.exe -u https://example.com -gorog
 | `-o` | txt | Output format (`txt` or `html`) |
 | `-K` | false | Print key files only |
 | `-Ineedparms` | false | Extract parameters into `Params.txt` |
+| `-ey` | false | Enable malicious-content keyword matching (off by default) |
+| `-person` | false | Enable personal-info extraction: ID card / phone numbers (off by default) |
+| `-scan-libs` | false | Also scan known public JS libs (jquery/vue/axios etc.) for secrets/JWT (skipped by default to avoid false positives) |
+| `-intranet-ip` | false | Match hardcoded intranet IPs (RFC1918, off by default to reduce noise) |
+| `-finding-verify` | false | Black-box read-only GET verification of OSS buckets / map keys / LLM keys (pass → HIGH, fail → LOW; off by default) |
 
 ### 📂 Output Layout
 
@@ -304,6 +336,10 @@ JSAPIscan.exe -u https://example.com -gjca "password,secret_key,admin"
 # Replace defaults
 JSAPIscan.exe -u https://example.com -gjc "internal_api,debug_mode"
 ```
+
+### 📦 Use as a Go Library
+
+See 👉 [README_SDK.md](README_SDK.md) for SDK-style API usage.
 
 ### 🐛 Feedback
 
