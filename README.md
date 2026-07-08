@@ -67,6 +67,15 @@
 > 需要 Go **1.25+**。
 
 ```bash
+# 标准构建
+go build -o JSAPIscan.exe main.go         # Windows
+go build -o JSAPIscan main.go             # Linux / macOS
+
+# 多平台 + 混淆构建（需要 garble）
+build.bat
+```
+
+```bash
 # 单 URL 扫描
 JSAPIscan.exe -u https://example.com
 
@@ -79,42 +88,36 @@ JSAPIscan.exe -u https://example.com -gorog
 
 ### 🛠️ 参数说明
 
-| 参数 | 默认值 | 说明 |
-|------|--------|------|
-| `-u` | | 目标 URL（逗号分隔支持多个） |
-| `-f` | | 批量 URL 文件路径 |
-| `-t` | 5 | 线程数（使用 `-u` 时强制为 1） |
-| `-ft` | 10 | 单目标内同层 JS/HTML 抓取并发数（`-u` 时仍可并发抓 chunk） |
-| `-d` | 8 | 爬取深度 |
-| `-time` | 10 | 单次请求超时（秒） |
-| `-maxreq` | 4000 | 单个 URL 最多 JS 请求数 |
-| `-maxhtml` | 40 | 单个 URL 最多 HTML 请求数 |
-| `-maxapi` | 3000 | 单目标最多 API 测试数量（0 不限制） |
-| `-header` | | 自定义请求头 `"Key:Value\r\nKey2:Value2"` |
-| `-p` | | 代理 `http://127.0.0.1:8080` |
-| `-pa` | false | 只对接口未授权测试使用代理 |
-| `-tlsverify` | false | 校验服务器 TLS 证书（扫内网自签证书保持关闭） |
-| `-gorog` | false | 开启无头浏览器模式 |
-| `-savejs` | false | 保存爬取到的 JS 源文件到 `res/js/` |
-| `-saveapi` | false | 保存全部候选 API 接口到 `候选接口.txt`（完整列表，不受 `-maxapi` 截断） |
-| `-sc` | | 过滤显示的状态码，逗号分割 |
-| `-gjca` | | 追加自定义敏感关键字，逗号分割 |
-| `-gjc` | | 仅使用自定义关键字（替换默认） |
-| `-aget` | false | 接口测试只使用 GET |
-| `-basejspath` | | 自定义 JS 路径前缀（生成带/不带前缀两次请求） |
-| `-baseapipath` | | 自定义 API 路径前缀（生成带/不带前缀两次请求） |
-| `-extlink` | false | 开启外链扫描 |
-| `-extlinksuffix` | `.js,.html,.htm` | 外链扫描后缀，逗号分割 |
-| `-extlinkdepth` | 1 | 外链扫描深度 |
-| `-domainblock` | | 域名黑名单，逗号分割（默认含 github/google/bing 等） |
-| `-o` | txt | 输出格式 `txt` / `html` |
-| `-K` | false | 只打印关键文件 |
-| `-Ineedparms` | false | 开启参数提取并写入 `Params.txt` |
-| `-ey` | false | 开启恶意内容关键词匹配（默认关闭） |
-| `-person` | false | 开启身份证/手机号等个人信息提取（默认关闭） |
-| `-scan-libs` | false | 对公共 JS 库（jquery/vue/axios 等）也扫 Secret/JWT（默认跳过以避免误报） |
-| `-intranet-ip` | false | 匹配硬编码内网 IP（RFC1918，默认关闭以减少噪音） |
-| `-finding-verify` | false | 对 OSS 桶 / 地图 Key / LLM Key 发起黑盒只读 GET 验证（通过升 HIGH、失败降 LOW，默认关闭） |
+| 参数             | 默认值           | 说明                                                         |
+| ---------------- | ---------------- | ------------------------------------------------------------ |
+| `-u`             |                  | 目标 URL（逗号分隔支持多个）                                 |
+| `-f`             |                  | 批量 URL 文件路径                                            |
+| `-t`             | 5                | 线程数（使用 `-u` 时强制为 1）                               |
+| `-d`             | 8                | 爬取深度                                                     |
+| `-time`          | 10               | 单次请求超时（秒）                                           |
+| `-maxreq`        | 4000             | 单个 URL 最多 JS 请求数                                      |
+| `-maxhtml`       | 40               | 单个 URL 最多 HTML 请求数                                    |
+| `-maxapi`        | 3000             | 单目标最多 API 测试数量（0 不限制）                          |
+| `-header`        |                  | 自定义请求头 `"Key:Value\r\nKey2:Value2"`                    |
+| `-header-file`   |                  | 从文件读取多行请求头，格式同 `-header`；文件仅包含 cookie 值时自动作为 `Cookie` 请求头 |
+| `-p`             |                  | 代理 `http://127.0.0.1:8080`                                 |
+| `-pa`            | false            | 只对接口未授权测试使用代理                                   |
+| `-tlsverify`     | false            | 校验服务器 TLS 证书（扫内网自签证书保持关闭）                |
+| `-gorog`         | false            | 开启无头浏览器模式                                           |
+| `-savejs`        | false            | 保存爬取到的 JS 源文件到 `res/js/`                           |
+| `-sc`            |                  | 过滤显示的状态码，逗号分割                                   |
+| `-gjca`          |                  | 追加自定义敏感关键字，逗号分割                               |
+| `-gjc`           |                  | 仅使用自定义关键字（替换默认）                               |
+| `-aget`          | false            | 接口测试只使用 GET                                           |
+| `-basejspath`    |                  | 自定义 JS 路径前缀（生成带/不带前缀两次请求）                |
+| `-baseapipath`   |                  | 自定义 API 路径前缀（生成带/不带前缀两次请求）               |
+| `-extlink`       | false            | 开启外链扫描                                                 |
+| `-extlinksuffix` | `.js,.html,.htm` | 外链扫描后缀，逗号分割                                       |
+| `-extlinkdepth`  | 1                | 外链扫描深度                                                 |
+| `-domainblock`   |                  | 域名黑名单，逗号分割（默认含 github/google/bing 等）         |
+| `-o`             | txt              | 输出格式 `txt` / `html`                                      |
+| `-K`             | false            | 只打印关键文件                                               |
+| `-Ineedparms`    | false            | 开启参数提取并写入 `Params.txt`                              |
 
 ### 📂 输出结构
 
@@ -146,6 +149,17 @@ JSAPIscan.exe -u https://example.com -header "Authorization:Bearer eyJhbGci..."
 
 # 多个头
 JSAPIscan.exe -u https://example.com -header "Authorization:Bearer token\r\nX-Custom:value"
+
+# 从文件读取多行请求头
+JSAPIscan.exe -u https://example.com -header-file headers.txt
+```
+
+`headers.txt` 示例：
+
+```text
+Authorization: Bearer token
+Cookie: sid=xxx; token=yyy
+X-Custom: value
 ```
 
 **代理**
@@ -179,6 +193,10 @@ JSAPIscan.exe -u https://example.com -gjca "password,secret_key,admin"
 # 仅使用（替换默认）
 JSAPIscan.exe -u https://example.com -gjc "internal_api,debug_mode"
 ```
+
+### 📦 作为 Go 库使用
+
+作为 SDK 调用请看 👉 [README_SDK.md](README_SDK.md)。
 
 ### 🐛 反馈
 
@@ -236,42 +254,36 @@ JSAPIscan.exe -u https://example.com -gorog
 
 ### 🛠️ Parameters
 
-| Flag | Default | Description |
-|------|---------|-------------|
-| `-u` | | Target URL (comma-separated for multiple) |
-| `-f` | | Batch URL file path |
-| `-t` | 5 | Thread count (forced to 1 when `-u` is used) |
-| `-ft` | 10 | Per-target fetch concurrency for same-depth JS/HTML (chunks still fetched concurrently with `-u`) |
-| `-d` | 8 | Crawl depth |
-| `-time` | 10 | Per-request timeout (seconds) |
-| `-maxreq` | 4000 | Max JS requests per URL |
-| `-maxhtml` | 40 | Max HTML requests per URL |
-| `-maxapi` | 3000 | Max API tests per target (0 = unlimited) |
-| `-header` | | Custom headers: `"Key:Value\r\nKey2:Value2"` |
-| `-p` | | Proxy: `http://127.0.0.1:8080` |
-| `-pa` | false | Use proxy only for API testing |
-| `-tlsverify` | false | Verify server TLS certs (keep off for self-signed internal targets) |
-| `-gorog` | false | Headless browser mode |
-| `-savejs` | false | Save crawled JS files to `res/js/` |
-| `-saveapi` | false | Save all API candidates to `候选接口.txt` (full list, not truncated by `-maxapi`) |
-| `-sc` | | Filter status codes, comma-separated |
-| `-gjca` | | Append custom sensitive keywords, comma-separated |
-| `-gjc` | | Use only custom keywords (replaces defaults) |
-| `-aget` | false | API testing uses GET only |
-| `-basejspath` | | Custom JS path prefix (issues both prefixed & unprefixed requests) |
-| `-baseapipath` | | Custom API path prefix (issues both prefixed & unprefixed requests) |
-| `-extlink` | false | Enable external-link scanning |
-| `-extlinksuffix` | `.js,.html,.htm` | External-link suffixes, comma-separated |
-| `-extlinkdepth` | 1 | External-link scan depth |
-| `-domainblock` | | Domain blocklist, comma-separated (default includes github/google/bing etc.) |
-| `-o` | txt | Output format (`txt` or `html`) |
-| `-K` | false | Print key files only |
-| `-Ineedparms` | false | Extract parameters into `Params.txt` |
-| `-ey` | false | Enable malicious-content keyword matching (off by default) |
-| `-person` | false | Enable personal-info extraction: ID card / phone numbers (off by default) |
-| `-scan-libs` | false | Also scan known public JS libs (jquery/vue/axios etc.) for secrets/JWT (skipped by default to avoid false positives) |
-| `-intranet-ip` | false | Match hardcoded intranet IPs (RFC1918, off by default to reduce noise) |
-| `-finding-verify` | false | Black-box read-only GET verification of OSS buckets / map keys / LLM keys (pass → HIGH, fail → LOW; off by default) |
+| Flag             | Default          | Description                                                  |
+| ---------------- | ---------------- | ------------------------------------------------------------ |
+| `-u`             |                  | Target URL (comma-separated for multiple)                    |
+| `-f`             |                  | Batch URL file path                                          |
+| `-t`             | 5                | Thread count (forced to 1 when `-u` is used)                 |
+| `-d`             | 8                | Crawl depth                                                  |
+| `-time`          | 10               | Per-request timeout (seconds)                                |
+| `-maxreq`        | 4000             | Max JS requests per URL                                      |
+| `-maxhtml`       | 40               | Max HTML requests per URL                                    |
+| `-maxapi`        | 3000             | Max API tests per target (0 = unlimited)                     |
+| `-header`        |                  | Custom headers: `"Key:Value\r\nKey2:Value2"`                 |
+| `-header-file`   |                  | Read multi-line request headers from a file, using the same format as `-header`; cookie-only files become a `Cookie` header |
+| `-p`             |                  | Proxy: `http://127.0.0.1:8080`                               |
+| `-pa`            | false            | Use proxy only for API testing                               |
+| `-tlsverify`     | false            | Verify server TLS certs (keep off for self-signed internal targets) |
+| `-gorog`         | false            | Headless browser mode                                        |
+| `-savejs`        | false            | Save crawled JS files to `res/js/`                           |
+| `-sc`            |                  | Filter status codes, comma-separated                         |
+| `-gjca`          |                  | Append custom sensitive keywords, comma-separated            |
+| `-gjc`           |                  | Use only custom keywords (replaces defaults)                 |
+| `-aget`          | false            | API testing uses GET only                                    |
+| `-basejspath`    |                  | Custom JS path prefix (issues both prefixed & unprefixed requests) |
+| `-baseapipath`   |                  | Custom API path prefix (issues both prefixed & unprefixed requests) |
+| `-extlink`       | false            | Enable external-link scanning                                |
+| `-extlinksuffix` | `.js,.html,.htm` | External-link suffixes, comma-separated                      |
+| `-extlinkdepth`  | 1                | External-link scan depth                                     |
+| `-domainblock`   |                  | Domain blocklist, comma-separated (default includes github/google/bing etc.) |
+| `-o`             | txt              | Output format (`txt` or `html`)                              |
+| `-K`             | false            | Print key files only                                         |
+| `-Ineedparms`    | false            | Extract parameters into `Params.txt`                         |
 
 ### 📂 Output Layout
 
@@ -303,6 +315,17 @@ JSAPIscan.exe -u https://example.com -header "Authorization:Bearer eyJhbGci..."
 
 # Multiple headers
 JSAPIscan.exe -u https://example.com -header "Authorization:Bearer token\r\nX-Custom:value"
+
+# Read multi-line headers from file
+JSAPIscan.exe -u https://example.com -header-file headers.txt
+```
+
+Example `headers.txt`:
+
+```text
+Authorization: Bearer token
+Cookie: sid=xxx; token=yyy
+X-Custom: value
 ```
 
 **Proxy**
@@ -337,9 +360,7 @@ JSAPIscan.exe -u https://example.com -gjca "password,secret_key,admin"
 JSAPIscan.exe -u https://example.com -gjc "internal_api,debug_mode"
 ```
 
-### 📦 Use as a Go Library
 
-See 👉 [README_SDK.md](README_SDK.md) for SDK-style API usage.
 
 ### 🐛 Feedback
 
@@ -347,7 +368,3 @@ See 👉 [README_SDK.md](README_SDK.md) for SDK-style API usage.
 - Got a JS pattern that slips past detection? Ping the author — 🎁 red-packet reward for reproducers.
 
 ---
-
-## 📄 License
-
-See [LICENSE](LICENSE).
